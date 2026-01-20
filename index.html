@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Box Destroy Game</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+
+    .startGame {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #score {
+      font-size: 32px;
+      color: #333;
+    }
+
+    .cont {
+      height: 80vh;
+      width: 300px;
+      border: 2px solid #000;
+      position: relative;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .newBox {
+      height: 80px;
+      width: 60px;
+      background: red;
+      position: absolute;
+      top: -100px;
+      animation: moveDown 4s linear forwards;
+      border: none;
+      cursor: pointer;
+    }
+
+    @keyframes moveDown {
+      from {
+        top: -100px;
+      }
+      to {
+        top: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <button class="startGame">Start Game</button>
+  <h1 id="score">0</h1>
+
+  <div class="cont">
+    <audio id="destroyAudio" src="destroy.mp3"></audio>
+    <audio id="overAudio" src="gameOver.mp3"></audio>
+  </div>
+
+  <script>
+    const startBtn = document.querySelector(".startGame");
+    const scoreEl = document.querySelector("#score");
+    const container = document.querySelector(".cont");
+    const destroyAudio = document.querySelector("#destroyAudio");
+    const overAudio = document.querySelector("#overAudio");
+
+    let score = 0;
+    let gameInterval = null;
+    let gameRunning = false;
+
+    function play(audio) {
+      audio.currentTime = 0;
+      audio.play();
+    }
+
+    function createBox() {
+      const box = document.createElement("button");
+      box.classList.add("newBox");
+
+      // random position
+      box.style.left = Math.random() * 240 + "px";
+
+      // destroy box
+      box.addEventListener("click", () => {
+        play(destroyAudio);
+        score++;
+        scoreEl.innerText = score;
+        box.remove();
+      });
+
+      // game over
+      box.addEventListener("animationend", () => {
+        if (!box.isConnected) return;
+        endGame();
+      });
+
+      container.appendChild(box);
+    }
+
+    function startGame() {
+      if (gameRunning) return;
+
+      gameRunning = true;
+      score = 0;
+      scoreEl.innerText = score;
+      container.innerHTML += "";
+
+      gameInterval = setInterval(createBox, 1000);
+    }
+
+    function endGame() {
+      clearInterval(gameInterval);
+      gameRunning = false;
+      play(overAudio);
+      alert("Game Over!");
+    }
+
+    startBtn.addEventListener("click", startGame);
+  </script>
+
+</body>
+</html>
