@@ -1,265 +1,273 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Box Destroy Game</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Box Destroy Game</title>
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Segoe UI, Arial;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Segoe UI, Arial;
+    }
 
-body{
-  background: radial-gradient(circle at top, #1e1e2f, #000);
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:12px;
-  padding:15px;
-  color:white;
-}
+    body {
+      background: radial-gradient(circle at top, #1e1e2f, #000);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 15px;
+      color: white;
+    }
 
-.controls{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
 
-select, button{
-  padding:10px 14px;
-  border-radius:8px;
-  border:none;
-  font-weight:bold;
-}
+    select,
+    button {
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+    }
 
-select{
-  background:#fff;
-}
+    select {
+      background: #fff;
+    }
 
-.startGame{
-  background:linear-gradient(135deg,#ff4d4d,#ff0000);
-  color:white;
-  cursor:pointer;
-}
+    .startGame {
+      background: linear-gradient(135deg, #ff4d4d, #ff0000);
+      color: white;
+      cursor: pointer;
+    }
 
-#score{
-  font-size:32px;
-  color:#00ffcc;
-}
+    #score {
+      font-size: 32px;
+      color: #00ffcc;
+    }
 
-.cont{
-  height:70vh;
-  width:320px;
-  background:linear-gradient(#fff,#eaeaea);
-  border-radius:12px;
-  position:relative;
-  overflow:hidden;
-}
+    .cont {
+      height: 70vh;
+      width: 320px;
+      background: linear-gradient(#fff, #eaeaea);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+    }
 
-.newBox{
-  width:60px;
-  height:60px;
-  position:absolute;
-  top:-80px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  animation:moveDown linear forwards;
-}
+    .newBox {
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      top: -80px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      animation: moveDown linear forwards;
+    }
 
-@keyframes moveDown{
-  from{top:-80px;}
-  to{top:100%;}
-}
+    @keyframes moveDown {
+      from {
+        top: -80px;
+      }
 
-span{
-  font-size:0.6rem;
-  text-align:center;
-  background:white;
-  color:black;
-  padding:5px;
-  border-radius:10px;
-}
+      to {
+        top: 100%;
+      }
+    }
 
-a{
-  text-decoration:none;
-  color:rgb(26,26,174);
-  font-style:italic;
-}
+    span {
+      font-size: 0.6rem;
+      text-align: center;
+      background: white;
+      color: black;
+      padding: 5px;
+      border-radius: 10px;
+    }
 
-.ad{
-  width:100%;
-  max-width:340px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:12px;
-}
+    a {
+      text-decoration: none;
+      color: rgb(26, 26, 174);
+      font-style: italic;
+    }
 
-@media(max-width:480px){
-  .cont{width:100%;}
-  iframe{width:100%!important;}
-}
-</style>
+    .ad {
+      width: 100%;
+      max-width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    @media(max-width:480px) {
+      .cont {
+        width: 100%;
+      }
+
+      iframe {
+        width: 100% !important;
+      }
+    }
+  </style>
 
 
 </head>
 
 <body>
 
-<div class="controls">
-  <select id="difficulty">
-    <option value="easy">Easy</option>
-    <option value="hard">Hard</option>
-  </select>
-  <button class="startGame">▶ Start Game</button>
-</div>
+  <div class="controls">
+    <select id="difficulty">
+      <option value="easy">Easy</option>
+      <option value="hard">Hard</option>
+    </select>
+    <button class="startGame">▶ Start Game</button>
+  </div>
 
-<h1 id="score">0</h1>
+  <h1 id="score">0</h1>
 
-<div class="cont">
-  <audio id="destroyAudio" src="destroy.mp3"></audio>
-  <audio id="overAudio" src="gameOver.mp3"></audio>
+  <div class="cont">
+    <audio id="destroyAudio" src="destroy.mp3"></audio>
+    <audio id="overAudio" src="gameOver.mp3"></audio>
 
-  <a href="https://www.effectivegatecpm.com/dur1idn8?key=27326f1a7726a6508f62e4d59b18cb3f">Don't click here 😂</a>
- <br> <br><br><br>
-    <!-- <a href="https://www.effectivegatecpm.com/dur1idn8?key=27326f1a7726a6508f62e4d59b18cb3f">Nahi bhai mujhe NI 😒</a> -->
+    <a href="https://www.effectivegatecpm.com/dur1idn8?key=27326f1a7726a6508f62e4d59b18cb3f">Don't click here 😂</a>
+    <br> 
+   
 
-</div>
+  </div>
 
-<span>Made with ❤️ by <a href="https://xpertbite.in/about-us">anilmonitor</a></span>
+  <span>Made with ❤️ by <a href="https://xpertbite.in/about-us">anilmonitor</a></span>
 
-<script>
-const startBtn = document.querySelector(".startGame");
-const scoreEl = document.querySelector("#score");
-const container = document.querySelector(".cont");
-const destroyAudio = document.querySelector("#destroyAudio");
-const overAudio = document.querySelector("#overAudio");
-const difficultySelect = document.querySelector("#difficulty");
+  <div class="ad">
 
-let score = 0;
-let lastScore = 0;
-let gameInterval = null;
-let gameRunning = false;
 
-const colors = ["#ff4d4d","#00c853","#2979ff","#ff9100","#d500f9"];
 
-function play(audio){
-  audio.currentTime = 0;
-  audio.play();
-}
+    <script>
+      atOptions = {
+        'key': 'b1084166802b7c5c7db69f46b0f5cf71',
+        'format': 'iframe',
+        'height': 250,
+        'width': 300,
+        'params': {}
+      };
+    </script>
+    <script src="https://www.highperformanceformat.com/b1084166802b7c5c7db69f46b0f5cf71/invoke.js"></script>
 
-function vibrate(ms){
-  if(navigator.vibrate) navigator.vibrate(ms);
-}
 
-function createBox(speed){
-  const box = document.createElement("button");
-  box.className = "newBox";
-  box.style.left = Math.random() * 260 + "px";
-  box.style.background = colors[Math.floor(Math.random()*colors.length)];
-  box.style.animationDuration = speed + "ms";
 
-  box.onclick = () => {
-    play(destroyAudio);
-    vibrate(60);
-    score++;
-    scoreEl.innerText = score;
-    box.remove();
-  };
+  </div>
 
-  box.addEventListener("animationend",()=>{
-    if(box.isConnected) endGame();
-  });
 
-  container.appendChild(box);
-}
+  <script>
+    const startBtn = document.querySelector(".startGame");
+    const scoreEl = document.querySelector("#score");
+    const container = document.querySelector(".cont");
+    const destroyAudio = document.querySelector("#destroyAudio");
+    const overAudio = document.querySelector("#overAudio");
+    const difficultySelect = document.querySelector("#difficulty");
 
-function startGame(){
-  if(gameRunning) return;
+    let score = 0;
+    let lastScore = 0;
+    let gameInterval = null;
+    let gameRunning = false;
 
-  gameRunning = true;
-  score = 0;
-  scoreEl.innerText = score;
+    const colors = ["#ff4d4d", "#00c853", "#2979ff", "#ff9100", "#d500f9"];
 
-  container.querySelectorAll(".newBox").forEach(b => b.remove());
-
-  const difficulty = difficultySelect.value;
-  let intervalTime, speed, blocksPerTick;
-
-  if(difficulty === "easy"){
-    intervalTime = 900;
-    speed = 2400;
-    blocksPerTick = 1;
-  }else{
-    intervalTime = 650;   // balanced hard
-    speed = 1900;
-    blocksPerTick = 1;    // reduced blocks
-  }
-
-  gameInterval = setInterval(()=>{
-    for(let i=0;i<blocksPerTick;i++){
-      createBox(speed);
+    function play(audio) {
+      audio.currentTime = 0;
+      audio.play();
     }
-  }, intervalTime);
-}
 
-function endGame(){
-  if(!gameRunning) return;
+    function vibrate(ms) {
+      if (navigator.vibrate) navigator.vibrate(ms);
+    }
 
-  clearInterval(gameInterval);
-  gameRunning = false;
-  lastScore = score;
+    function createBox(speed) {
+      const box = document.createElement("button");
+      box.className = "newBox";
+      box.style.left = Math.random() * 260 + "px";
+      box.style.background = colors[Math.floor(Math.random() * colors.length)];
+      box.style.animationDuration = speed + "ms";
 
-  play(overAudio);
-  vibrate([200,100,200]);
+      box.onclick = () => {
+        play(destroyAudio);
+        vibrate(60);
+        score++;
+        scoreEl.innerText = score;
+        box.remove();
+      };
 
-  setTimeout(()=>{
-    alert("Game Over!\nYour Score: " + lastScore);
-    resetGame();
-  },100);
-}
+      box.addEventListener("animationend", () => {
+        if (box.isConnected) endGame();
+      });
 
-function resetGame(){
-  container.querySelectorAll(".newBox").forEach(b => b.remove());
-  scoreEl.innerText = lastScore;
-}
+      container.appendChild(box);
+    }
 
-startBtn.onclick = ()=>{
-  vibrate(120);
-  startGame();
-};
-</script>
+    function startGame() {
+      if (gameRunning) return;
 
-<!-- ADS (UNCHANGED) -->
-<div class="ad">
- 
+      gameRunning = true;
+      score = 0;
+      scoreEl.innerText = score;
 
-<script>
-  atOptions = {
-    'key' : 'c1126cc2220f9bab20b301d5dcb9ba2a',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/c1126cc2220f9bab20b301d5dcb9ba2a/invoke.js"></script>
+      container.querySelectorAll(".newBox").forEach(b => b.remove());
 
-<!--  -->
-  <script async="async" data-cfasync="false" src="https://pl28542543.effectivegatecpm.com/4ad2ecb88febd80a004b988672cc331c/invoke.js"></script>
-<div id="container-4ad2ecb88febd80a004b988672cc331c"></div>
+      const difficulty = difficultySelect.value;
+      let intervalTime, speed, blocksPerTick;
 
+      if (difficulty === "easy") {
+        intervalTime = 900;
+        speed = 2400;
+        blocksPerTick = 1;
+      } else {
+        intervalTime = 650;   // balanced hard
+        speed = 1900;
+        blocksPerTick = 1;    // reduced blocks
+      }
 
+      gameInterval = setInterval(() => {
+        for (let i = 0; i < blocksPerTick; i++) {
+          createBox(speed);
+        }
+      }, intervalTime);
+    }
 
-</div>
+    function endGame() {
+      if (!gameRunning) return;
 
+      clearInterval(gameInterval);
+      gameRunning = false;
+      lastScore = score;
 
-<!-- <script src="https://pl28542599.effectivegatecpm.com/e1/1c/15/e11c1506e1748cc36b489ea859dbeaf0.js"></script> -->
+      play(overAudio);
+      vibrate([200, 100, 200]);
+
+      setTimeout(() => {
+        alert("Game Over!\nYour Score: " + lastScore);
+        resetGame();
+      }, 100);
+    }
+
+    function resetGame() {
+      container.querySelectorAll(".newBox").forEach(b => b.remove());
+      scoreEl.innerText = lastScore;
+    }
+
+    startBtn.onclick = () => {
+      vibrate(120);
+      startGame();
+    };
+  </script>
+
 </body>
+
 </html>
